@@ -2,6 +2,8 @@
 
 namespace OwnerRez\Api\Resources;
 
+use OwnerRez\Api\Glue\ResourceBase;
+
 class ExternalSites extends ResourceBase
 {
     public function __construct($service)

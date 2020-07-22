@@ -1,11 +1,6 @@
 <?php
 
-
-namespace OwnerRez\Api\Resources;
-
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Request;
-use OwnerRez\Api\Glue\Service;
+namespace OwnerRez\Api\Glue;
 
 class ResourceBase
 {
