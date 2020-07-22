@@ -21,13 +21,13 @@ class ResourceBase
     {
         $path = $this->getSanatizedPath($this->resourcePath . '/' . $actionOrId);
 
-        return $this->service->request('GET', $path, [ 'query' => $query ]);
+        return $this->service->request('GET', $path, [ 'query' => $query ])->getBody();
     }
 
     public function patch(int $id, array $values)
     {
         $path = $this->resourcePath . '/' . $id;
 
-        return $this->service->request('PATCH', $path, [ 'json' => $values ]);
+        return $this->service->request('PATCH', $path, [ 'json' => $values ])->getBody();
     }
 }

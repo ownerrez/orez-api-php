@@ -1,6 +1,7 @@
 {
   "name": "ownerrez/orez-api-php",
-  "description": "description",
+  "version": "1.0",
+  "description": "Official PHP wrapper for the OwnerRez API",
   "minimum-stability": "stable",
   "license": "proprietary",
   "authors": [
