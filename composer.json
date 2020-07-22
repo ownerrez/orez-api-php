@@ -1,0 +1,26 @@
+{
+  "name": "ownerrez/orez-api-php",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "OwnerRez Inc",
+      "email": "dev@ownerreservations.com"
+    }
+  ],
+  "require": {
+    "php": "^7.4",
+    "guzzlehttp/guzzle": "^7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "OwnerRez\\Api\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "OwnerRez\\Api\\Tests\\": "test/"
+    }
+  }
+}

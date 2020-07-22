@@ -1,0 +1,37 @@
+<?php
+
+namespace OwnerRez\Api;
+
+use OwnerRez\Api\Glue\Service;
+
+final class Client
+{
+    const API_VERSION = 'v1';
+
+    private string $username;
+    private string $accessToken;
+    private Service $service;
+
+    public function __construct(string $username, string $accessToken, string $apiRoot = null)
+    {
+        $this->service = new Service($username, $accessToken, $apiRoot);
+    }
+
+    public function externalSites()
+    {
+        return new Resources\ExternalSites($this->service);
+    }
+
+    public function properties()
+    {
+        return new Resources\Properties($this->service);
+    }
+
+    public function users()
+    {
+        return new Resources\Users($this->service);
+    }
+}
+
+spl_autoload_extensions(".php"); // comma-separated list
+spl_autoload_register();
