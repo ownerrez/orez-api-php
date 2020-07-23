@@ -10,4 +10,9 @@ class ExternalSites extends ResourceBase
     {
         parent::__construct($service, 'externalsites');
     }
+
+    public function register()
+    {
+        parent::post("register");
+    }
 }

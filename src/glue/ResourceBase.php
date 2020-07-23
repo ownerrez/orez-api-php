@@ -7,17 +7,17 @@ class ResourceBase
     protected string $resourcePath;
     protected Service $service;
 
-    public function __construct(Service $service, $resourcePath) {
+    public function __construct(Service $service, string $resourcePath) {
         $this->service = $service;
         $this->resourcePath = $resourcePath;
     }
 
-    function getSanatizedPath($path)
+    function getSanatizedPath(string $path)
     {
         return str_replace('//', '/', $path);
     }
 
-    public function get($actionOrId = null, $query = null)
+    public function get($actionOrId = null, array $query = null)
     {
         $path = $this->getSanatizedPath($this->resourcePath . '/' . $actionOrId);
 
@@ -29,5 +29,12 @@ class ResourceBase
         $path = $this->resourcePath . '/' . $id;
 
         return $this->service->request('PATCH', $path, [ 'json' => $values ])->getBody();
+    }
+
+    public function post($actionOrId = null, array $values = null)
+    {
+        $path = $this->getSanatizedPath($this->resourcePath . '/' . $actionOrId);
+
+        return $this->service->request('POST', $path, [ 'json' => $values ])->getBody();
     }
 }
