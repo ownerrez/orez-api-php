@@ -20,6 +20,11 @@ class ResourceBase
     public function request(string $method, string $action = null, int $id = null, array $queryOrForm = null)
     {
         $path = $this->getSanatizedPath($this->resourcePath . '/' . $id . '/' . $action);
-        return $this->service->request(strtoupper($method), $path, $queryOrForm)->getBody();
+        $attachAt = 'json';
+
+        if (strcasecmp($method, 'get') == 0)
+            $attachAt = 'query';
+
+        return $this->service->request(strtoupper($method), $path, [ $attachAt => $queryOrForm ])->getBody();
     }
 }
