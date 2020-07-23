@@ -12,6 +12,6 @@ class Users extends ResourceBase
 
     public function me()
     {
-        return parent::get('me');
+        return parent::request('get', 'me');
     }
 }

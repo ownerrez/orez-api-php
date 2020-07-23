@@ -17,24 +17,9 @@ class ResourceBase
         return str_replace('//', '/', $path);
     }
 
-    public function get($actionOrId = null, array $query = null)
+    public function request(string $method, string $action = null, int $id = null, array $queryOrForm = null)
     {
-        $path = $this->getSanatizedPath($this->resourcePath . '/' . $actionOrId);
-
-        return $this->service->request('GET', $path, [ 'query' => $query ])->getBody();
-    }
-
-    public function patch(int $id, array $values)
-    {
-        $path = $this->resourcePath . '/' . $id;
-
-        return $this->service->request('PATCH', $path, [ 'json' => $values ])->getBody();
-    }
-
-    public function post($actionOrId = null, array $values = null)
-    {
-        $path = $this->getSanatizedPath($this->resourcePath . '/' . $actionOrId);
-
-        return $this->service->request('POST', $path, [ 'json' => $values ])->getBody();
+        $path = $this->getSanatizedPath($this->resourcePath . '/' . $id . '/' . $action);
+        return $this->service->request(strtoupper($method), $path, $queryOrForm)->getBody();
     }
 }

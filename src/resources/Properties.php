@@ -13,6 +13,6 @@ class Properties extends ResourceBase
 
     public function search(array $query)
     {
-        return parent::get("search", $query);
+        return parent::request('get', "search", null, $query);
     }
 }

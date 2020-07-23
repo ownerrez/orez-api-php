@@ -6,10 +6,6 @@ use OwnerRez\Api\Glue\Service;
 
 final class Client
 {
-    const API_VERSION = 'v1';
-
-    private string $username;
-    private string $accessToken;
     private Service $service;
 
     public function __construct(string $username, string $accessToken, string $apiRoot = null)

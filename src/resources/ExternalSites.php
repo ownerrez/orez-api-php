@@ -13,6 +13,6 @@ class ExternalSites extends ResourceBase
 
     public function register()
     {
-        parent::post("register");
+        return parent::request('post', "register");
     }
 }
