@@ -17,7 +17,9 @@
   },
   "autoload": {
     "psr-4": {
-      "OwnerRez\\Api\\": "src/"
+      "OwnerRez\\Api\\": "src/",
+      "OwnerRez\\Api\\Glue\\": "src/glue/",
+      "OwnerRez\\Api\\Resources\\": "src/resources/"
     }
   },
   "autoload-dev": {
