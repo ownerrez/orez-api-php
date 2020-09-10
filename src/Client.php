@@ -23,6 +23,11 @@ final class Client
         return new Resources\Properties($this->service);
     }
 
+    public function quotes()
+    {
+        return new Resources\Quotes($this->service);
+    }
+
     public function users()
     {
         return new Resources\Users($this->service);

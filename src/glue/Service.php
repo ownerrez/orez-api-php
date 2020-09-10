@@ -57,12 +57,7 @@ final class Service
             }
         }
 
-        try {
-            return $this->client->request($method, $resource, $options);
-        }catch (GuzzleException $e) {
-            // Throw exception
-            throw new \Exception('Request to ' . $resource . ' failed: ' . $e->getMessage());
-        }
+        return $this->client->request($method, $resource, $options);
     }
 }
 

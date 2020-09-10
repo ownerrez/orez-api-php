@@ -17,14 +17,24 @@ class ResourceBase
         return str_replace('//', '/', $path);
     }
 
-    public function request(string $method, string $action = null, int $id = null, array $queryOrForm = null)
+    public function request(string $method, string $action = null, int $id = null, array $queryOrFormData = null, $body = null)
     {
         $path = $this->getSanatizedPath($this->resourcePath . '/' . $id . '/' . $action);
-        $attachAt = 'json';
 
-        if (strcasecmp($method, 'get') == 0)
-            $attachAt = 'query';
+        $options = null;
 
-        return $this->service->request(strtoupper($method), $path, [ $attachAt => $queryOrForm ])->getBody();
+        if ($body != null) {
+            $options = [ 'body' => json_encode($body) ];
+        }
+        else {
+            $attachAt = 'json';
+
+            if (strcasecmp($method, 'get') == 0 or $body != null)
+                $attachAt = 'query';
+
+            $options = [ $attachAt => $queryOrFormData ];
+        }
+
+        return $this->service->request(strtoupper($method), $path, $options)->getBody();
     }
 }
