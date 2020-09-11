@@ -18,6 +18,11 @@ final class Client
         return new Resources\ExternalSites($this->service);
     }
 
+    public function guests()
+    {
+        return new Resources\Guests($this->service);
+    }
+
     public function properties()
     {
         return new Resources\Properties($this->service);
