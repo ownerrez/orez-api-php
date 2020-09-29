@@ -17,9 +17,10 @@ class ResourceBase
         return str_replace('//', '/', $path);
     }
 
-    public function request(string $method, string $action = null, int $id = null, array $queryOrFormData = null, $body = null)
+    public function request(string $method, string $action = null, string $id = null, array $queryOrFormData = null, $body = null)
     {
-        $path = $this->getSanatizedPath($this->resourcePath . '/' . $id . '/' . $action);
+        $numericId = preg_replace("/[^0-9]/", "", $id);
+        $path = $this->getSanatizedPath($this->resourcePath . '/' . $numericId . '/' . $action);
 
         $options = null;
 
