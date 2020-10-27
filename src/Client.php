@@ -13,6 +13,11 @@ final class Client
         $this->service = new Service($username, $accessToken, $apiRoot);
     }
 
+    public function bookings()
+    {
+        return new Resources\Bookings($this->service);
+    }
+
     public function externalSites()
     {
         return new Resources\ExternalSites($this->service);
