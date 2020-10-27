@@ -11,11 +11,6 @@ class ExternalSites extends ResourceBase
         parent::__construct($service, 'externalsites');
     }
 
-    public function get(int $id)
-    {
-        return parent::request('get', null, $id);
-    }
-
     public function register()
     {
         return parent::request('post', "register");
