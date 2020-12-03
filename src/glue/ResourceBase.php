@@ -4,8 +4,8 @@ namespace OwnerRez\Api\Glue;
 
 class ResourceBase
 {
-    protected string $resourcePath;
-    protected Service $service;
+    protected $resourcePath;
+    protected $service;
 
     public function __construct(Service $service, string $resourcePath) {
         $this->service = $service;

@@ -10,9 +10,9 @@ final class Service
 {
     const API_VERSION = 'v1';
 
-    private string $username;
-    private string $accessToken;
-    public Client $client;
+    private $username;
+    private $accessToken;
+    public $client;
 
 
     /**
