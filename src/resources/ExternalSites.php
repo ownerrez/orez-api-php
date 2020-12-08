@@ -11,8 +11,8 @@ class ExternalSites extends ResourceBase
         parent::__construct($service, 'externalsites');
     }
 
-    public function register()
+    public function register($webhookUrl = null, $webhookToken = null)
     {
-        return parent::request('post', "register");
+        return parent::request('post', "register", null, array("webhookUrl"=>$webhookUrl, "webhookToken"=>$webhookToken));
     }
 }
