@@ -12,6 +12,8 @@ class ResourceBase
         $this->resourcePath = $resourcePath;
     }
 
+    protected function validate(array $item) { }
+
     function getSanatizedPath(string $path)
     {
         return str_replace('//', '/', $path);
@@ -19,6 +21,9 @@ class ResourceBase
 
     public function request(string $method, string $action = null, int $id = null, array $queryOrFormData = null, $body = null)
     {
+        if ($body != null)
+            $this->validate($body);
+
         $path = $this->getSanatizedPath($this->resourcePath . '/' . $id . '/' . $action);
 
         $options = null;
