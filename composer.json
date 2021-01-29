@@ -1,6 +1,6 @@
 {
   "name": "ownerrez/orez-api",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Official PHP wrapper for the OwnerRez API",
   "minimum-stability": "stable",
   "license": "MIT",
@@ -12,7 +12,7 @@
     }
   ],
   "require": {
-    "php": "^7.4",
+    "php": "^7.4 || ^8.0",
     "guzzlehttp/guzzle": "^7.0"
   },
   "autoload": {
