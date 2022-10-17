@@ -43,6 +43,11 @@ final class Client
         return new Resources\Quotes($this->service);
     }
 
+    public function tags(): Resources\Tags
+    {
+        return new Resources\Tags($this->service);
+    }
+
     public function users(): Resources\Users
     {
         return new Resources\Users($this->service);
