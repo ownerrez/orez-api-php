@@ -18,9 +18,19 @@ final class Client
         return new Resources\Bookings($this->service);
     }
 
-    public function externalSites(): Resources\ExternalSites
+//    public function external_sites(): Resources\ExternalSites
+//    {
+//        return new Resources\ExternalSites($this->service);
+//    }
+
+    public function field_definitions(): Resources\FieldDefinitions
     {
-        return new Resources\ExternalSites($this->service);
+        return new Resources\FieldDefinitions($this->service);
+    }
+
+    public function fields(): Resources\Fields
+    {
+        return new Resources\Fields($this->service);
     }
 
     public function guests(): Resources\Guests
@@ -28,19 +38,24 @@ final class Client
         return new Resources\Guests($this->service);
     }
 
-    public function listings(): Resources\Listings
-    {
-        return new Resources\Listings($this->service);
-    }
+//    public function listings(): Resources\Listings
+//    {
+//        return new Resources\Listings($this->service);
+//    }
+//
+//    public function properties(): Resources\Properties
+//    {
+//        return new Resources\Properties($this->service);
+//    }
+//
+//    public function quotes(): Resources\Quotes
+//    {
+//        return new Resources\Quotes($this->service);
+//    }
 
-    public function properties(): Resources\Properties
+    public function tag_definitions(): Resources\TagDefinitions
     {
-        return new Resources\Properties($this->service);
-    }
-
-    public function quotes(): Resources\Quotes
-    {
-        return new Resources\Quotes($this->service);
+        return new Resources\TagDefinitions($this->service);
     }
 
     public function tags(): Resources\Tags

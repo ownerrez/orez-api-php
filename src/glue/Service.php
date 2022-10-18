@@ -8,7 +8,7 @@ use GuzzleHttp\Psr7\Request;
 
 final class Service
 {
-    const API_VERSION = 'v1';
+    const API_VERSION = 'v2';
 
     private $username;
     private $accessToken;
