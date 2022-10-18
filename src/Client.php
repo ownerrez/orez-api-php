@@ -67,4 +67,9 @@ final class Client
     {
         return new Resources\Users($this->service);
     }
+
+    public function webhook_subscriptions(): Resources\WebhookSubscriptions
+    {
+        return new Resources\WebhookSubscriptions($this->service);
+    }
 }
