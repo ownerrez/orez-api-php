@@ -7,12 +7,13 @@ class ResourceBase
     protected $resourcePath;
     protected $service;
 
-    public function __construct(Service $service, string $resourcePath) {
+    use ResourceTrait;
+
+    public function __construct(Service $service, string $resourcePath)
+    {
         $this->service = $service;
         $this->resourcePath = $resourcePath;
     }
-
-    protected function validate(array $item) { }
 
     function getSanatizedPath(string $path)
     {
@@ -29,15 +30,14 @@ class ResourceBase
         $options = null;
 
         if ($body != null) {
-            $options = [ 'body' => json_encode($body) ];
-        }
-        else {
+            $options = ['body' => json_encode($body)];
+        } else {
             $attachAt = 'json';
 
             if (strcasecmp($method, 'get') == 0 or $body != null)
                 $attachAt = 'query';
 
-            $options = [ $attachAt => $queryOrFormData ];
+            $options = [$attachAt => $queryOrFormData];
         }
 
         return $this->service->request(strtoupper($method), $path, $options)->getBody();

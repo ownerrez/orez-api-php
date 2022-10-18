@@ -10,15 +10,25 @@ class Tags extends ResourceBase
         parent::__construct($service, 'tags');
     }
 
-    static array $integerProperties = [ "tagGroupId" ];
-
-    protected function validate(array $item)
+    public function list(int $entity_id, int $entity_type)
     {
-        foreach (self::$integerProperties as &$prop) {
-            if (key_exists($prop, $item) && !empty($item[$prop]) && !is_numeric($item[$prop]))
-                throw new \Exception("The field '" . $prop . "' must be an integer value!");
-        }
+        return parent::request('get', null, null, array(
+            "entity_id" => $entity_id,
+            "entity_type" => $entity_type
+        ));
+    }
 
-        parent::validate($item);
+    public function delete_by_name(string $name, int $entity_id, int $entity_type)
+    {
+        return parent::request('delete', "byname", null, array(
+            "name" => $name,
+            "entity_id" => $entity_id,
+            "entity_type" => $entity_type
+        ));
+    }
+
+    protected function patch(int $id, string $jsonbody)
+    {
+        throw new \Exception("The PATCH verb is not defined for Tags.");
     }
 }

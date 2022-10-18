@@ -14,4 +14,19 @@ class Users extends ResourceBase
     {
         return parent::request('get', 'me');
     }
+
+    protected function get($id)
+    {
+        throw new \Exception("The GET verb is not defined for Users.");
+    }
+
+    protected function post($jsonbody)
+    {
+        throw new \Exception("The POST verb is not defined for Users.");
+    }
+
+    protected function delete($id)
+    {
+        throw new \Exception("The DELETE verb is not defined for Users.");
+    }
 }
