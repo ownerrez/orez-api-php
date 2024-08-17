@@ -6,11 +6,12 @@ use OwnerRez\Api\Glue\ResourceBase;
 
 class Tags extends ResourceBase
 {
-    public function __construct($service) {
+    public function __construct(\OwnerRez\Api\Glue\Service $service)
+    {
         parent::__construct($service, 'tags');
     }
 
-    static array $integerProperties = [ "tagGroupId" ];
+    static array $integerProperties = [ 'tagGroupId' ];
 
     protected function validate(array $item)
     {

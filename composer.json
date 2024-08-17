@@ -1,19 +1,18 @@
 {
   "name": "ownerrez/orez-api",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Official PHP wrapper for the OwnerRez API",
   "minimum-stability": "stable",
   "license": "MIT",
   "authors": [
     {
       "name": "OwnerRez Inc",
-      "email": "dev@ownerreservations.com",
+      "email": "dev@ownerrez.com",
       "homepage": "http://ownerrez.com"
     }
   ],
   "require": {
-    "php": "^7.4 || ^8.0",
-    "guzzlehttp/guzzle": "^7.0"
+    "php": "^7.4 || ^8.0"
   },
   "autoload": {
     "psr-4": {

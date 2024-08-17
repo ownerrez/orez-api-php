@@ -4,22 +4,23 @@ namespace OwnerRez\Api\Glue;
 
 class ResourceBase
 {
-    protected $resourcePath;
-    protected $service;
+    protected string $resourcePath;
+    protected \OwnerRez\Api\Glue\Service $service;
 
-    public function __construct(Service $service, string $resourcePath) {
+    public function __construct(\OwnerRez\Api\Glue\Service $service, string $resourcePath)
+    {
         $this->service = $service;
         $this->resourcePath = $resourcePath;
     }
 
     protected function validate(array $item) { }
 
-    function getSanatizedPath(string $path)
+    private function getSanatizedPath(string $path): string
     {
         return str_replace('//', '/', $path);
     }
 
-    public function request(string $method, string $action = null, int $id = null, array $queryOrFormData = null, $body = null)
+    public function request(string $method, string $action = null, int $id = null, array $queryOrFormData = null, $body = null): array
     {
         if ($body != null)
             $this->validate($body);
@@ -27,19 +28,24 @@ class ResourceBase
         $path = $this->getSanatizedPath($this->resourcePath . '/' . $id . '/' . $action);
 
         $options = null;
+        $content = null;
 
-        if ($body != null) {
-            $options = [ 'body' => json_encode($body) ];
+        if ($body != null)
+        {
+            $content = json_encode($body);
         }
-        else {
-            $attachAt = 'json';
-
+        else if ($queryOrFormData != null && !empty($queryOrFormData))
+        {
             if (strcasecmp($method, 'get') == 0 or $body != null)
-                $attachAt = 'query';
-
-            $options = [ $attachAt => $queryOrFormData ];
+                $path .= '?' . http_build_query($queryOrFormData);
+            else
+                $content = json_encode($queryOrFormData);
         }
 
-        return $this->service->request(strtoupper($method), $path, $options)->getBody();
+        $request = $this->service->request(strtoupper($method), $path, $content, $options);
+
+        $request->Throw();
+
+        return $request->getJson();
     }
 }
