@@ -12,8 +12,8 @@ final class Service
     private string $accessToken;
     private string $baseUri;
 
-    private bool $useFileGetContents;
-    private bool $useCurl;
+    private bool $supportsFileGetContents;
+    private bool $supportsCurl;
     private string $backEnd;
 
     /**
@@ -33,21 +33,19 @@ final class Service
         $this->baseUri = $apiRoot . self::API_VERSION . '/';
 
         if (\function_exists('file_get_contents') && \ini_get('allow_url_fopen') == 1 && in_array('https', \stream_get_wrappers()))
-            $this->useFileGetContents = true;
+            $this->supportsFileGetContents = true;
         else
-            $this->useFileGetContents = false;
+            $this->supportsFileGetContents = false;
 
         if (\function_exists('curl_init'))
-            $this->useCurl = true;
+            $this->supportsCurl = true;
         else
-            $this->useCurl = false;
+            $this->supportsCurl = false;
 
-        if ($backEnd == null && $this->useFileGetContents)
+        if ($backEnd != 'curl' && $this->supportsFileGetContents)
             $this->backEnd = 'file_get_contents';
-        else if ($backEnd == null && $this->useCurl)
+        else if ($backEnd != 'file_get_contents' && $this->supportsCurl)
             $this->backEnd = 'curl';
-        else if ($backEnd != null)
-            $this->backEnd = $backEnd;
         else    
             throw new \Exception('No backend available');
     }

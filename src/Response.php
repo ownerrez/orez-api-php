@@ -53,7 +53,7 @@ class Response
         $this->raw_response = $response;
 
         if ($response !== false && ! empty($response_data) && is_array($response_data))
-		{
+        {
             if ($backEnd == 'file_get_contents')
                 $this->parseFileGetContents($response_data);
             else
