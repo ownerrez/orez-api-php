@@ -15,17 +15,21 @@ final class Service
     private bool $supportsFileGetContents;
     private bool $supportsCurl;
     private string $backEnd;
+    private bool $associative = false;
 
     /**
      * Service constructor.
      * @param string $username
      * @param string $accessToken
      * @param string|null $apiRoot must end with a trailing slash
+     * @param string|null $backEnd 'file_get_contents' or 'curl' backend for requests
+     * @param bool $associative return associative arrays instead of objects
      */
-    public function __construct(string $username, string $accessToken, string $apiRoot = null, string $backEnd = null)
+    public function __construct(string $username, string $accessToken, string $apiRoot = null, string $backEnd = null, bool $associative = false)
     {
         $this->username = $username;
         $this->accessToken = $accessToken;
+        $this->associative = $associative;
 
         if ($apiRoot == null)
             $apiRoot = 'https://api.ownerrez.com/';
@@ -105,7 +109,7 @@ final class Service
 
         $response = \file_get_contents($this->baseUri . $uri, false, $context);
 
-        return new \OwnerRez\Api\Response($response, $http_response_header, 'file_get_contents');
+        return new \OwnerRez\Api\Response($response, $http_response_header, 'file_get_contents', $this->associative);
     }
 
     private function useCurl($method, $uri, string $content = null, array $additionalOptions = null): \OwnerRez\Api\Response
@@ -146,7 +150,7 @@ final class Service
             if ($response === false)
                 throw new \Exception(\curl_error($ch), \curl_errno($ch));
 
-            return new \OwnerRez\Api\Response($response, \curl_getinfo($ch), 'curl');
+            return new \OwnerRez\Api\Response($response, \curl_getinfo($ch), 'curl', $this->associative);
         }
         finally
         {

@@ -11,7 +11,7 @@ class Users extends ResourceBase
         parent::__construct($service, 'users');
     }
 
-    public function me()
+    public function me()/*: mixed */
     {
         return parent::request('get', 'me');
     }

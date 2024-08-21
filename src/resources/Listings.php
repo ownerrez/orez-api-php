@@ -11,17 +11,17 @@ class Listings extends ResourceBase
         parent::__construct($service, 'listings');
     }
 
-    public function summary(array $query, $id = null): array
+    public function summary(array $query, $id = null)/*: mixed */
     {
         return parent::request('get', 'summary', $id, $query);
     }
 
-    public function pricing(array $query, $id): array
+    public function pricing(array $query, $id)/*: mixed */
     {
         return parent::request('get', 'summary', $id, $query);
     }
 
-    public function availability(array $query, $id = null): array
+    public function availability(array $query, $id = null)/*: mixed */
     {
         return parent::request('get', 'summary', $id, $query);
     }

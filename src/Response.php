@@ -11,7 +11,8 @@ class Response
     private int $status_code = 0;
     private ?\OwnerRez\Api\Exception $exception = null;
 
-    private ?array $json = null;
+    private bool $associative = false;
+    private /* mixed */ $json = null;
 
     const HTTP_STATUS_CODE =
     [
@@ -48,9 +49,10 @@ class Response
         505 => 'HTTP Version Not Supported',
     ];
 
-    public function __construct(string $response, array $response_data, string $backEnd)
+    public function __construct(string $response, array $response_data, string $backEnd, bool $associative = false)
     {
         $this->raw_response = $response;
+        $this->associative = $associative;
 
         if ($response !== false && ! empty($response_data) && is_array($response_data))
         {
@@ -177,11 +179,11 @@ class Response
         return $this->raw_response;
     }
 
-    public function getJson(): array
+    public function getJson()/*: mixed */
     {
         if ($this->json === null)
         {
-            $this->json = json_decode($this->raw_response, true);
+            $this->json = json_decode($this->raw_response, $this->associative);
         }
 
         return $this->json;

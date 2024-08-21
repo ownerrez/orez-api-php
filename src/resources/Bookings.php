@@ -11,7 +11,7 @@ class Bookings extends ResourceBase
         parent::__construct($service, 'bookings');
     }
 
-    public function availability(array $query): array
+    public function availability(array $query)/*: mixed */
     {
         return parent::request('get', "availability", null, $query);
     }

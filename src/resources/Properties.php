@@ -11,7 +11,7 @@ class Properties extends ResourceBase
         parent::__construct($service, 'properties');
     }
 
-    public function search(array $query): array
+    public function search(array $query)/*: mixed */
     {
         return parent::request('get', 'search', null, $query);
     }
