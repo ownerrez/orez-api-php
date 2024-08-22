@@ -18,3 +18,9 @@ $ownerRez->properties()->search([
     'limit' => 10
 ]);
 ```
+
+## Release
+
+This library is hosted on [packagist.org](https://packagist.org/packages/ownerrez/orez-api).
+
+To create a new release on packagist, create a [Github release](https://github.com/ownerrez/orez-api-php/releases).
