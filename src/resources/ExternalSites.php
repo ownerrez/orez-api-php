@@ -6,13 +6,13 @@ use OwnerRez\Api\Glue\ResourceBase;
 
 class ExternalSites extends ResourceBase
 {
-    public function __construct($service)
+    public function __construct(\OwnerRez\Api\Glue\Service $service)
     {
         parent::__construct($service, 'externalsites');
     }
 
-    public function register($webhookUrl = null, $webhookToken = null)
+    public function register($webhookUrl = null, $webhookToken = null)/*: mixed */
     {
-        return parent::request('post', "register", null, array("webhookUrl"=>$webhookUrl, "webhookToken"=>$webhookToken));
+        return parent::request('post', "register", null, ['webhookUrl' => $webhookUrl, 'webhookToken' => $webhookToken]);
     }
 }

@@ -31,5 +31,8 @@ composer.phar
 # PHP Storm
 /.idea
 
+# Visual Studio Code
+.vscode/
+
 # project specific
 test/test-credentials.php

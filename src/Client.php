@@ -6,11 +6,13 @@ use OwnerRez\Api\Glue\Service;
 
 final class Client
 {
+    const VERSION = '1.1.0';
+
     private $service;
 
-    public function __construct(string $username, string $accessToken, string $apiRoot = null)
+    public function __construct(string $username, string $accessToken, string $apiRoot = null, string $backEnd = null)
     {
-        $this->service = new Service($username, $accessToken, $apiRoot);
+        $this->service = new Service($username, $accessToken, $apiRoot, $backEnd);
     }
 
     public function bookings(): Resources\Bookings
