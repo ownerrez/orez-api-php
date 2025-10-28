@@ -25,7 +25,7 @@ final class Service
      * @param string|null $backEnd 'file_get_contents' or 'curl' backend for requests
      * @param bool $associative return associative arrays instead of objects
      */
-    public function __construct(string $username, string $accessToken, string $apiRoot = null, string $backEnd = null, bool $associative = false)
+    public function __construct(string $username, string $accessToken, ?string $apiRoot = null, ?string $backEnd = null, bool $associative = false)
     {
         $this->username = $username;
         $this->accessToken = $accessToken;
@@ -50,7 +50,7 @@ final class Service
             $this->backEnd = 'file_get_contents';
         else if ($backEnd != 'file_get_contents' && $this->supportsCurl)
             $this->backEnd = 'curl';
-        else    
+        else
             throw new \Exception('No backend available');
     }
 
@@ -59,7 +59,7 @@ final class Service
      * @param string $uri URI to request
      * @param array|null $additionalOptions Additional options to pass to the \stream_context_create
      */
-    public function request($method, $uri, string $content = null, array $additionalOptions = null): \OwnerRez\Api\Response
+    public function request($method, $uri, ?string $content = null, ?array $additionalOptions = null): \OwnerRez\Api\Response
     {
         if ($this->backEnd == 'file_get_contents')
             return $this->useFileGetContents($method, $uri, $content, $additionalOptions);
@@ -74,7 +74,7 @@ final class Service
         return $this->backEnd;
     }
 
-    private function useFileGetContents($method, $uri, string $content = null, array $additionalOptions = null): \OwnerRez\Api\Response
+    private function useFileGetContents($method, $uri, ?string $content = null, ?array $additionalOptions = null): \OwnerRez\Api\Response
     {
         $options =
         [
@@ -97,9 +97,9 @@ final class Service
 
         if ($additionalOptions != null)
             $options = array_merge_recursive($options, $additionalOptions);
-    
+
         $context = \stream_context_create($options);
-        
+
         $headers = [];
 
         foreach ($options['http']['header'] as $key => $value)
@@ -112,7 +112,7 @@ final class Service
         return new \OwnerRez\Api\Response($response, $http_response_header, 'file_get_contents', $this->associative);
     }
 
-    private function useCurl($method, $uri, string $content = null, array $additionalOptions = null): \OwnerRez\Api\Response
+    private function useCurl($method, $uri, ?string $content = null, ?array $additionalOptions = null): \OwnerRez\Api\Response
     {
         try
         {
@@ -139,7 +139,7 @@ final class Service
                 \curl_setopt($ch, \CURLOPT_POSTFIELDS, $content);
                 $headers[] = 'Content-Type: application/json';
             }
-            
+
             \curl_setopt($ch, \CURLOPT_HTTPHEADER, $headers);
 
             if ($additionalOptions != null)

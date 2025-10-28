@@ -6,7 +6,7 @@ class Response
 {
     private string $raw_response;
     private array $raw_response_header;
-    
+
     private array $headers = [];
     private int $status_code = 0;
     private ?\OwnerRez\Api\Exception $exception = null;
@@ -49,7 +49,7 @@ class Response
         505 => 'HTTP Version Not Supported',
     ];
 
-    public function __construct(string $response, array $response_data, string $backEnd, bool $associative = false)
+    public function __construct(string $response, ?array $response_data, string $backEnd, bool $associative = false)
     {
         $this->raw_response = $response;
         $this->associative = $associative;
@@ -84,7 +84,7 @@ class Response
 
             // Fix case of header key
             $key = ucwords(strtolower($key), '-');
-            
+
             if (isset($this->headers[$key]) && is_array($this->headers[$key]))
             {
                 $this->headers[$key][] = $value;
@@ -143,7 +143,7 @@ class Response
         // split raw_response into headers and body
         $headers = explode("\r\n", trim(substr($this->raw_response, 0, $response_data['header_size'])));
         $this->parseRawResponseHeader($headers);
-        
+
         $this->raw_response = substr($this->raw_response, $response_data['header_size']);
 
         if ($this->status_code >= 400)

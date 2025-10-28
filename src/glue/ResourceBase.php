@@ -20,7 +20,7 @@ class ResourceBase
         return str_replace('//', '/', $path);
     }
 
-    public function request(string $method, string $action = null, int $id = null, array $queryOrFormData = null, $body = null) /*: mixed */
+    public function request(string $method, ?string $action = null, ?int $id = null, ?array $queryOrFormData = null, $body = null) /*: mixed */
     {
         if ($body != null)
             $this->validate($body);
