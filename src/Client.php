@@ -10,7 +10,7 @@ final class Client
 
     private $service;
 
-    public function __construct(string $username, string $accessToken, string $apiRoot = null, string $backEnd = null)
+    public function __construct(string $username, string $accessToken, ?string $apiRoot = null, ?string $backEnd = null)
     {
         $this->service = new Service($username, $accessToken, $apiRoot, $backEnd);
     }
