@@ -92,6 +92,9 @@ final class Service
             ]
         ];
 
+        if (strpos($this->baseUri, '.dev.') !== false)
+            $options['ssl'] = ['verify_peer' => false, 'verify_peer_name' => false];
+
         if ($content != null)
             $options['http']['header']['Content-Type'] = 'application/json';
 
